@@ -54,30 +54,30 @@ The largest runs (`val_rq3_extended.py`, `paris_release_size.py`) take hours.
 | Table 2 (dataset statistics) | `geolife_e0_semantic.py`, `matsum_prepare.py`, `matsum_summarize.py` | `data/geolife/geolife_E0.csv`, `results/paris/summarization_rate.csv` |
 | Fig. 2, Table S2 (m, k sweep) | `val_paris_eval.py` | `results/paris/val_sweep_mk.csv`, `figures/fig_mk_sweep.png` |
 | Table 3, Fig. 3, Table S3 | `val_abstraction_ci.py` | `results/paris/val_abstraction_ci.csv`, `figures/fig_abstraction_ci.png` |
-| Table 4 | `val_abstraction_diagnostics.py` | `data/paris/val_abstraction_diagnostics.csv` |
-| Fig. 4 | `val_abstraction_budget.py` | `figures/fig_abstraction_budget.png` |
+| Table S19 | `val_abstraction_diagnostics.py` | `data/paris/val_abstraction_diagnostics.csv` |
+| Fig. S11 | `val_abstraction_budget.py`, `replot_abstraction_budget.py` | `data/paris/val_abstraction_budget.csv`, `figures/fig_abstraction_budget_semantic.png` |
 | Table S4 | `val_abstraction_smoothing.py` | `data/paris/val_abstraction_smoothing*.csv` |
-| Table 5, Tables S9, S10 | `val_abstraction_ngrams.py`, `make_supp_tex.py` | `data/paris/val_abstraction_ngrams*.csv`, `paper_tables/` |
+| Table S20, Tables S9, S10 | `val_abstraction_ngrams.py`, `make_supp_tex.py` | `data/paris/val_abstraction_ngrams*.csv`, `paper_tables/` |
 | Mixed-use analysis | `val_mixeduse_downstream.py` | `results/paris/val_mixeduse_downstream.csv` |
-| Table 6, Fig. 5 | `geolife_e1.py` | `figures/fig_geolife_e1.png` |
-| Fig. 6, Tables S5, S6 (RQ2) | `val_rq2.py` | `results/paris/val_rq2_*.csv`, `figures/fig_rq2.png` |
-| Table 7, Fig. S2 | `geolife_e2.py` | `figures/fig_geolife_e2.png` |
-| Table 8, Fig. 7, Table S7 (RQ3) | `val_rq3.py` | `results/paris/val_rq3_*.csv`, `figures/fig_rq3.png` |
-| Table 9, Tables S11, S12 (order-2 Markov) | `val_rq3_order2.py` | `data/paris/val_rq3_order2_*.csv` |
+| Table 4, Fig. 4 | `geolife_e1.py` | `figures/fig_geolife_e1.png` |
+| Fig. 5, Tables S5, S6 (RQ2) | `val_rq2.py` | `results/paris/val_rq2_*.csv`, `figures/fig_rq2.png` |
+| Table 5, Fig. S2 | `geolife_e2.py` | `figures/fig_geolife_e2.png` |
+| Table 6, Fig. 6, Table S7 (RQ3) | `val_rq3.py` | `results/paris/val_rq3_*.csv`, `figures/fig_rq3.png` |
+| Table 7, Tables S11, S12 (order-2 Markov) | `val_rq3_order2.py` | `data/paris/val_rq3_order2_*.csv` |
 | Table S13, Fig. S10 (Pareto) | `val_rq3_pareto.py` | `data/paris/val_rq3_pareto.csv` |
 | Table S14 (hypervolume) | `val_rq3_hypervolume.py` | `data/paris/val_rq3_hypervolume_*.csv` |
-| Table 10, Tables S16, S17 (n-grams up to order 5, LSTM capacity scale) | `val_rq3_extended.py`, `val_rq3_extended_summary.py`, `make_rq3_ext_tex.py` | `data/paris/val_rq3_ext_*.csv`, `paper_tables/rq3_extended.tex` |
-| Table 11, Fig. S3 | `geolife_e3.py` | `figures/geolife_e3.png` |
-| Table 12, Table S15 (query workload utility) | `paris_workload_utility.py` | `data/paris/paris_workload_utility_*.csv` |
-| Table 13, Fig. 8 (TSTR) | `paris_tstr.py` | `results/paris/paris_tstr_*.csv`, `figures/paris_tstr.png` |
-| Fig. 9, Fig. S4 | `paris_geoviz.py` | `figures/fig_paris_geoviz*.png` |
-| Table 14, Fig. 10 (time of day) | `paris_time_of_day_ci.py` | `data/paris/paris_time_of_day_ci_*.csv`, `figures/fig_time_of_day_demand_ci.png` |
-| Fig. 11 (Paris disclosure) | `paris_disclosure.py`, `replot_disclosure.py` | `results/paris/paris_disclosure.csv`, `figures/Paris_disclosure.png` |
-| Fig. 12 (GeoLife disclosure) | `geolife_disclosure.py` | `figures/GeoLife_disclosure.png` |
-| Table 15, Fig. S6 (membership inference) | `paris_mia.py`, `geolife_mia.py`, `paris_shadow_mia.py` | `results/paris/paris_mia_*.csv`, `data/paris/paris_shadow_mia_*.csv` |
-| Table 16, Fig. S7 (unicity) | `unicity.py` | `results/paris/unicity_paris.csv`, `figures/unicity_*.png` |
+| Table 8, Tables S16, S17 (n-grams up to order 5, LSTM capacity scale) | `val_rq3_extended.py`, `val_rq3_extended_summary.py`, `make_rq3_ext_tex.py` | `data/paris/val_rq3_ext_*.csv`, `paper_tables/rq3_extended.tex` |
+| Table 9, Fig. S3 | `geolife_e3.py` | `figures/geolife_e3.png` |
+| Table 10, Table S15 (query workload utility) | `paris_workload_utility.py` | `data/paris/paris_workload_utility_*.csv` |
+| Table 11, Fig. 7 (TSTR) | `paris_tstr.py` | `results/paris/paris_tstr_*.csv`, `figures/paris_tstr.png` |
+| Fig. 8, Fig. S4 | `paris_geoviz.py` | `figures/fig_paris_geoviz*.png` |
+| Table 12, Fig. 9 (time of day) | `paris_time_of_day_ci.py` | `data/paris/paris_time_of_day_ci_*.csv`, `figures/fig_time_of_day_demand_ci.png` |
+| Fig. 10 (Paris disclosure) | `paris_disclosure.py`, `replot_disclosure.py` | `results/paris/paris_disclosure.csv`, `figures/Paris_disclosure.png` |
+| Fig. 11 (GeoLife disclosure) | `geolife_disclosure.py` | `figures/GeoLife_disclosure.png` |
+| Table 13, Fig. S6 (membership inference) | `paris_mia.py`, `geolife_mia.py`, `paris_shadow_mia.py` | `results/paris/paris_mia_*.csv`, `data/paris/paris_shadow_mia_*.csv` |
+| Table 14, Fig. S7 (unicity) | `unicity.py` | `results/paris/unicity_paris.csv`, `figures/unicity_*.png` |
 | Section S9.3 (edit-based disclosure) | `paris_edit_disclosure.py` | `data/paris/paris_edit_disclosure_*.csv` |
-| Table 17, Figs. S8, S9 (extra metrics) | `val_extra_metrics.py` | figures `fig_extra_metrics_*.png` (result CSV is regenerated by the script) |
+| Table 15, Figs. S8, S9 (extra metrics) | `val_extra_metrics.py` | figures `fig_extra_metrics_*.png` (result CSV is regenerated by the script) |
 | Fig. S5 (release size, Paris) | `paris_release_size.py` | `data/paris/paris_release_size_*.csv`, `figures/fig_release_size.png` |
 | Table S8 (release size, GeoLife) | `geolife_release_size.py` | `data/geolife/geolife_release_size*.csv` |
 | Table S1, Fig. S1 (GeoLife audit) | `geolife_retention.py`, `geolife_audit.py`, `geolife_points.py`, `geolife_build_cache.py` | `figures/fig_geolife_diag.png` |
