@@ -103,4 +103,4 @@ The per-tile visitation-frequency tables of the real data are not released. Only
 
 ## License
 
-To be added by the authors.
+Code and result files are released under the MIT License (see `LICENSE`). The input datasets keep their own licenses (Paris-OSM on Zenodo, GeoLife, OpenStreetMap).
