@@ -1,7 +1,7 @@
 # MAT-Sum: Semantic Abstraction for Privacy-Aware Synthetic Mobility Generation
 
 Code, intermediate data and result files for the paper
-*Semantic Abstraction for Privacy-Aware Synthetic Mobility Generation* (ACM TIST, under review)
+*Semantic Abstraction for Privacy-Aware Synthetic Mobility Generation* (under review)
 and its Supplementary Material.
 
 Every table and figure of the paper and of the supplement is produced by one of the scripts listed below.
