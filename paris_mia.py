@@ -11,10 +11,10 @@ Reported across n over 20 replicates. A well-generalising generator gives AUC ~ 
 import os, numpy as np, pandas as pd
 from collections import Counter, defaultdict
 from sklearn.metrics import roc_auc_score, roc_curve
-import matsum_summarize as MS
+import semantic_locations as MS
 from val_rq3 import rle, subset_matrix, sim, markov
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", OUT)
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", OUT)
 M, K, N_SYN, R, TEST_FRAC = 2, 5, 400, 20, 0.20
 NS = [20, 50, 100, 300, 465]
 jac = lambda a, b: len(a & b) / len(a | b) if (a | b) else 0.0

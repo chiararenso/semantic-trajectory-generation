@@ -16,10 +16,10 @@ the question is how much of the LSTM's trigram gain and near-copy cost a memory-
 """
 import os, numpy as np, pandas as pd
 from collections import Counter, defaultdict
-import matsum_summarize as MS
+import semantic_locations as MS
 from val_rq3 import (rle, ngram, tv, subset_matrix, sim, jac, K, N_SYN, MAXLEN, NS, R, REF_CAP, NEAR, TCRIT)
 
-OUT = os.environ["MATSUM_OUT"]
+OUT = os.environ["SEM_OUT"]
 ALPHA = 0.1
 VARIANTS = [("Markov2", None), ("Markov2_heavy", "heavy")]   # lam=1 ; lam=alpha*|V|
 

@@ -17,7 +17,7 @@ import os, itertools, numpy as np, pandas as pd
 from scipy.stats import t as tdist, wilcoxon
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.environ.get("MATSUM_OUT", os.path.join(HERE, "data", "paris"))
+OUT = os.environ.get("SEM_OUT", os.path.join(HERE, "data", "paris"))
 R = 20
 TCRIT = float(tdist.ppf(0.975, R - 1))
 MODELS = ["Markov", "Markov2", "Markov2_heavy", "LSTM"]

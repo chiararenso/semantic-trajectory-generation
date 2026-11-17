@@ -1,8 +1,10 @@
-# MAT-Sum: Semantic Abstraction for Privacy-Aware Synthetic Mobility Generation
+# Semantic Abstraction for Privacy-Aware Synthetic Mobility Generation
 
 Code, intermediate data and result files for the paper
 *Semantic Abstraction for Privacy-Aware Synthetic Mobility Generation* (under review)
 and its Supplementary Material.
+
+Semantic locations are built with the MAT-Sum summarization method (Pugliese et al., SIGSPATIAL 2023), re-implemented here in `semantic_locations.py`.
 
 Every table and figure of the paper and of the supplement is produced by one of the scripts listed below.
 Result files are included, so tables and figures can be checked without re-running the experiments.
@@ -20,19 +22,19 @@ The OSM label taxonomy used by all scripts is in `data/labeled_OSM_category.csv`
 ## Setup
 
 ```bash
-python3.12 -m venv ~/matsum-venv
-~/matsum-venv/bin/pip install -r requirements.txt
+python3.12 -m venv ~/semgen-venv
+~/semgen-venv/bin/pip install -r requirements.txt
 export PYTHONHASHSEED=0          # fixes set ordering, needed for exact reproduction
-export MATSUM_OUT=$PWD/data/paris   # data directory read and written by the scripts
-export MATSUM_FIG=$PWD/figures      # figures
+export SEM_OUT=$PWD/data/paris   # data directory read and written by the scripts
+export SEM_FIG=$PWD/figures      # figures
 ```
 
 Other variables, used only by some scripts:
 
-* `MATSUM_INPUT`: path of the raw Paris points file (`matsum_prepare.py`).
-* `MATSUM_PBF`: path of the OSM `.pbf` extract (`matsum_prepare.py`, map preparation only).
+* `SEM_INPUT`: path of the raw Paris points file (`prepare_tiles.py`).
+* `SEM_PBF`: path of the OSM `.pbf` extract (`prepare_tiles.py`, map preparation only).
 * `GEO_OUT`: GeoLife data directory (`data/geolife`), needed by `geolife_e1.py` and other GeoLife scripts.
-* `MATSUM_DS`: dataset label for `val_extra_metrics.py` (`Paris` or `GeoLife`).
+* `SEM_DS`: dataset label for `val_extra_metrics.py` (`Paris` or `GeoLife`).
 
 Keep the virtual environment outside any cloud-synced folder.
 Scripts that run a neural generator (LSTM) need `torch`. They run on CPU.
@@ -42,16 +44,16 @@ The largest runs (`val_rq3_extended.py`, `paris_release_size.py`) take hours.
 
 | File | Role |
 |---|---|
-| `matsum_prepare.py` | builds tiles, OSM-enriched tiles and trajectories from the raw points |
-| `matsum_summarize.py` | semantic locations: top-m aspects, k-support, summarization rate |
-| `matsum_synth.py` | order-1 Markov generator, semantic vocabulary, sampling of visits |
-| `matsum_muitas.py` | MUITAS similarity used for near-copy detection |
+| `prepare_tiles.py` | builds tiles, OSM-enriched tiles and trajectories from the raw points |
+| `semantic_locations.py` | semantic locations: top-m aspects, k-support, summarization rate |
+| `semantic_markov.py` | order-1 Markov generator, semantic vocabulary, sampling of visits |
+| `muitas.py` | MUITAS similarity used for near-copy detection |
 
 ## Paper element → script → output
 
 | Paper element | Script | Main output |
 |---|---|---|
-| Table 2 (dataset statistics) | `geolife_e0_semantic.py`, `matsum_prepare.py`, `matsum_summarize.py` | `data/geolife/geolife_E0.csv`, `results/paris/summarization_rate.csv` |
+| Table 2 (dataset statistics) | `geolife_e0_semantic.py`, `prepare_tiles.py`, `semantic_locations.py` | `data/geolife/geolife_E0.csv`, `results/paris/summarization_rate.csv` |
 | Fig. 2, Table S2 (m, k sweep) | `val_paris_eval.py` | `results/paris/val_sweep_mk.csv`, `figures/fig_mk_sweep.png` |
 | Table 3, Fig. 3, Table S3 | `val_abstraction_ci.py` | `results/paris/val_abstraction_ci.csv`, `figures/fig_abstraction_ci.png` |
 | Table S9 | `val_abstraction_diagnostics.py` | `data/paris/val_abstraction_diagnostics.csv` |

@@ -3,7 +3,7 @@ semantic visits per user, and the effective user count U after the semantic-visi
 (>=10 semantic visits/session, >=3 valid sessions/user). No cross-session transitions (tid=user__session)."""
 import os, numpy as np, pandas as pd, geopandas as gpd
 
-OUT = os.environ["MATSUM_OUT"]; GEO = os.environ["GEO_OUT"]
+OUT = os.environ["SEM_OUT"]; GEO = os.environ["GEO_OUT"]
 MIN_VISITS, MIN_SESS = 10, 3
 
 gdf = gpd.read_parquet(os.path.join(OUT, "trajectories.parquet"))

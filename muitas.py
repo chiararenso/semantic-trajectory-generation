@@ -17,10 +17,10 @@ score naturally decreases as heavier merging (lower tau) grows those unions.
 """
 import os, ast
 import numpy as np, pandas as pd, geopandas as gpd
-import matsum_summarize as MS
+import semantic_locations as MS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT  = os.environ.get("MATSUM_OUT", os.path.join(HERE, "output"))
+OUT  = os.environ.get("SEM_OUT", os.path.join(HERE, "output"))
 TAUS = [0.9, 0.8, 0.7, 0.6, 0.5]
 
 

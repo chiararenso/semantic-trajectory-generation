@@ -20,8 +20,8 @@ import os, sys, time
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-os.environ.setdefault("MATSUM_OUT", os.path.join(HERE, "data", "paris"))
-import matsum_summarize as MS, matsum_synth as SY
+os.environ.setdefault("SEM_OUT", os.path.join(HERE, "data", "paris"))
+import semantic_locations as MS, semantic_markov as SY
 
 M, K = 2, 5
 MAX_N = 20000
@@ -108,7 +108,7 @@ for r in range(R):
 
 import pandas as pd
 raw_df = pd.DataFrame(rows)
-OUT_DIR = os.environ["MATSUM_OUT"]; FIG_DIR = os.environ.get("MATSUM_FIG", OUT_DIR)
+OUT_DIR = os.environ["SEM_OUT"]; FIG_DIR = os.environ.get("SEM_FIG", OUT_DIR)
 raw_df.to_csv(os.path.join(OUT_DIR, "paris_release_size_raw.csv"), index=False)
 
 metrics = ["dcr_mean", "dcr_p5", "dcr_min", "exact_copies", "exact_rate"]

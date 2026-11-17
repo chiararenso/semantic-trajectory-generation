@@ -13,8 +13,8 @@ Fronts use replicate means; the 95% CIs are drawn so that near-ties are visible 
 import os, numpy as np, pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.environ.get("MATSUM_OUT", os.path.join(HERE, "data", "paris"))
-FIG = os.environ.get("MATSUM_FIG", os.path.join(HERE, "val_paris", "figures"))
+OUT = os.environ.get("SEM_OUT", os.path.join(HERE, "data", "paris"))
+FIG = os.environ.get("SEM_FIG", os.path.join(HERE, "val_paris", "figures"))
 LABEL = {"Markov": "Markov-1", "Markov2": "Markov-2 (light)", "Markov2_heavy": "Markov-2 (heavy)", "LSTM": "LSTM"}
 COL = {"Markov": "#2c7fb8", "Markov2": "#1b9e77", "Markov2_heavy": "#7fc97f", "LSTM": "#d95f0e"}
 # (column, sign): sign=+1 means "minimise", -1 means "maximise" (we minimise sign*value)

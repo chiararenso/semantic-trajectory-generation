@@ -18,10 +18,10 @@ BOTH q_MUITAS(s) and q_edit(s), so we can directly quantify:
 """
 import os, numpy as np, pandas as pd
 from collections import Counter, defaultdict
-import matsum_summarize as MS, matsum_synth as SY
+import semantic_locations as MS, semantic_markov as SY
 from val_rq3 import rle, subset_matrix, sim as muitas_sim, markov
 
-OUT = os.environ["MATSUM_OUT"]
+OUT = os.environ["SEM_OUT"]
 M, K, N_SYN, R = 2, 5, 200, 20
 REF_CAP = 300           # capped reference set for tractability (same convention as elsewhere)
 TAU = 0.95

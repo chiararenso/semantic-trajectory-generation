@@ -61,7 +61,7 @@ for n in [1, 2, 3, 4, 5]:
         r = pg[(pg.n == n) & (pg.baseline == b)].iloc[0]
         extra = "" if r.wilcoxon_p < 1e-5 else f"$^\\dagger$"
         cells += [neg(f"{r.d_mean:+.3f}").replace("+", "") if r.d_mean > 0 else neg(f"{r.d_mean:.3f}"),
-                  neg(f"{r.d_z:.1f}"), f"{int(r.matsum_wins_of_20)}/20{extra}"]
+                  neg(f"{r.d_z:.1f}"), f"{int(r.semantic_wins_of_20)}/20{extra}"]
     w(f"{n} & " + " & ".join(cells) + r" \\")
 w(r"""\bottomrule
 \multicolumn{10}{l}{\footnotesize $^\dagger$ not significant ($p=0.62$ for $n{=}4$ vs.\ Top-1 label).}

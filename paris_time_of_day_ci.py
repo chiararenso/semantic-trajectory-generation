@@ -16,11 +16,11 @@ and subsequent visit times accumulate the sampled dwell times (no gaps), as in t
 import os
 from collections import Counter, defaultdict
 import numpy as np, pandas as pd
-import matsum_summarize as MS
-from matsum_synth import build_visits, anonymize_vocabulary, SemanticMarkov
-import matsum_synth as SY
+import semantic_locations as MS
+from semantic_markov import build_visits, anonymize_vocabulary, SemanticMarkov
+import semantic_markov as SY
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", ".")
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", ".")
 TZ = "Europe/Paris"
 M_TOP, K_SUPPORT, N_SYNTH, R, TOP = 2, 5, 200, 20, 7
 TCRIT = 2.093  # t_{0.975, 19}

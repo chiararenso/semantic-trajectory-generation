@@ -5,12 +5,12 @@ VECTORISED MUITAS: symbols come from a finite vocabulary, so a precomputed
 S×S subset matrix turns each MUITAS similarity into two numpy reductions,
 making nearest-neighbour / DCR tractable over hundreds of real trajectories.
 
-Env: MATSUM_OUT must point at the Paris val output dir.
+Env: SEM_OUT must point at the Paris val output dir.
 """
 import os, numpy as np, pandas as pd
-import matsum_summarize as MS, matsum_synth as SY
+import semantic_locations as MS, semantic_markov as SY
 
-OUT = os.environ["MATSUM_OUT"]
+OUT = os.environ["SEM_OUT"]
 N_SYNTH = 200
 REF_CAP = 150           # real trajectories sampled for nearest-neighbour / DCR
 CONFIGS = [(1, 5), (2, 5), (3, 5), (2, 2), (3, 2)]

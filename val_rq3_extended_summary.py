@@ -11,7 +11,7 @@ import os, numpy as np, pandas as pd
 from scipy.stats import t as _t, wilcoxon
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.environ.get("MATSUM_OUT", os.path.join(HERE, "data", "paris"))
+OUT = os.environ.get("SEM_OUT", os.path.join(HERE, "data", "paris"))
 NS = [20, 50, 100, 300, 581]
 LAB = {"markov1": "Markov-1", "markov2l": "Markov-2 light", "markov2h": "Markov-2 heavy", "lstm_h64": "LSTM h64 (original)",
        "lstm_h128": "LSTM h128", "lstm_h256": "LSTM h256", "lstm_l2": "LSTM 2 layers (h64)", "real-vs-real": "real-vs-real"}
@@ -87,7 +87,7 @@ def figure():
     """Capacity scale: LSTM hidden 64 / 128 / 256 (and 2 layers) vs the order-2 Markov (light) reference, for n = 20, 100, 581."""
     import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
     s = pd.read_csv(os.path.join(OUT, "val_rq3_ext_scale_summary.csv"))
-    fig_dir = os.environ.get("MATSUM_FIG", os.path.join(HERE, "val_paris", "figures")); os.makedirs(fig_dir, exist_ok=True)
+    fig_dir = os.environ.get("SEM_FIG", os.path.join(HERE, "val_paris", "figures")); os.makedirs(fig_dir, exist_ok=True)
     cfg = [("lstm_h64", "h64"), ("lstm_h128", "h128"), ("lstm_h256", "h256"), ("lstm_l2", "2 layers\n(h64)")]
     panels = [("TV3", "(A) trigram TV (↓)"), ("TV5", "(B) 5-gram TV (↓)"), ("near_pct", "(C) near-copy % (↓)"), ("dDCR", "(D) ΔDCR (↑)")]
     col = {20: "#d95f0e", 100: "#2c7fb8", 581: "#1b9e77"}

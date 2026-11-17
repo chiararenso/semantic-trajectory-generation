@@ -11,7 +11,7 @@ import os, numpy as np, pandas as pd
 from collections import Counter, defaultdict
 from geolife_e1 import load, rle, bigram, tv, submat, sim, markov
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", OUT)
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", OUT)
 K, N_SYN, R, REF = 5, 200, 20, 400
 NS = [10, 20, 30, 50, 75, 100, 150, 152]
 jac = lambda a, b: len(a & b) / len(a | b) if (a | b) else 0.0

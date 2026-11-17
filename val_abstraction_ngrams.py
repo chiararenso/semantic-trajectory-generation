@@ -21,9 +21,9 @@ Native-state TV (each method vs its own real distribution) is also reported for 
 import os, numpy as np, pandas as pd, geopandas as gpd
 from collections import Counter, defaultdict
 from sklearn.cluster import KMeans
-import matsum_summarize as MS, matsum_synth as SY
+import semantic_locations as MS, semantic_markov as SY
 
-OUT = os.environ["MATSUM_OUT"]
+OUT = os.environ["SEM_OUT"]
 TARGET, N_SYNTH = 328, 200
 R = 20
 ALPHA = 0.1
@@ -96,7 +96,7 @@ def main():
     frequent = [s for s, c in fs.items() if c >= 5 and len(s) > 0]
     jac = lambda a, b: len(a & b) / len(a | b) if (a | b) else 0.0
     remap = {s: (s if s in frequent else max(frequent, key=lambda f: jac(s, f))) for s in fs}
-    sem["matsum"] = sem["sig2"].map(lambda s: remap.get(s, s))
+    sem["sem_state"] = sem["sig2"].map(lambda s: remap.get(s, s))
     lo, hi = 0.0015, 0.06
     for _ in range(30):
         g = (lo + hi) / 2
@@ -109,7 +109,7 @@ def main():
     sem["cluster"] = km.predict(XY)
 
     methods = [("Grid-Markov", "grid"), ("Cluster-Markov", "cluster"),
-               ("MAT-Sum-Markov", "matsum"), ("Top1-Markov", "top1")]
+               ("MAT-Sum-Markov", "sem_state"), ("Top1-Markov", "top1")]
     dom = {col: sem.groupby(col)["top1"].agg(lambda s: s.value_counts().index[0]).to_dict()
            for _, col in methods}
     tids = sem["tid"].unique()
@@ -195,7 +195,7 @@ def main():
             wp = float(wilcoxon(d).pvalue) if np.any(d != 0) else 1.0
             wins = int((d > 0).sum())
             prows.append({"n": n, "baseline": base, "d_mean": round(float(d.mean()), 4), "d_z": round(float(dz), 2),
-                          "wilcoxon_p": wp, "matsum_wins_of_20": wins})
+                          "wilcoxon_p": wp, "semantic_wins_of_20": wins})
             print(f"  n={n}  {base:15s} d_mean={d.mean():+.4f}  d_z={dz:6.1f}  wilcoxon_p={wp:.2e}  wins={wins}/{R}")
     pd.DataFrame(prows).to_csv(os.path.join(OUT, "val_abstraction_ngrams_paired.csv"), index=False)
     print("\nsaved:", os.path.join(OUT, "val_abstraction_ngrams.csv"))

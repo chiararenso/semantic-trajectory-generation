@@ -3,7 +3,7 @@ Quality control that the frozen filters do not produce a deformed dataset."""
 import os, numpy as np, pandas as pd, geopandas as gpd
 import matplotlib; matplotlib.use("Agg"); import matplotlib.pyplot as plt
 
-OUT = os.environ["MATSUM_OUT"]; GEO = os.environ["GEO_OUT"]
+OUT = os.environ["SEM_OUT"]; GEO = os.environ["GEO_OUT"]
 MIN_VISITS, MIN_SESS = 10, 3
 
 S = pd.read_parquet(os.path.join(GEO, "geolife_sessions.parquet"))   # all 18670 sessions
@@ -68,6 +68,6 @@ ax[2].set_title("(C) coverage of kept sessions"); ax[2].set_xlabel("lon"); ax[2]
 fig.colorbar(hb, ax=ax[2], shrink=.8, label="log point density")
 fig.suptitle("GeoLife study-area audit (frozen filters)", fontsize=13)
 fig.tight_layout(rect=[0, 0, 1, 0.95])
-p = os.path.join(os.environ.get("MATSUM_FIG", OUT), "geolife_diagnostics.png")
+p = os.path.join(os.environ.get("SEM_FIG", OUT), "geolife_diagnostics.png")
 os.makedirs(os.path.dirname(p), exist_ok=True); fig.savefig(p, dpi=130); plt.close(fig)
 print("\nfigure:", p)

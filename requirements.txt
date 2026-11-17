@@ -16,5 +16,5 @@ pyrosm==0.13.1          # offline OSM .pbf enrichment (map preparation only)
 # Deep generator (RQ3 / E3 only)
 torch==2.13.0
 
-# Optional: interactive maps (matsum_visualize.py)
+# Optional: interactive maps (not used by the paper results)
 # folium

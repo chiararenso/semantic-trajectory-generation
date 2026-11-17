@@ -11,19 +11,19 @@ Phase 1a - mechanistic generator: order-1 semantic Markov chain (with START/END
 Evaluation - fidelity (unigram/bigram/dwell/length distances, MUITAS synth<->real)
              and privacy (distance-to-closest-record, exact copies, novelty).
 
-Run after matsum_prepare.py + matsum_summarize.py.
+Run after prepare_tiles.py + semantic_locations.py.
 """
 import os, json, math
 from collections import Counter, defaultdict
 import numpy as np
 import pandas as pd
 import geopandas as gpd
-import matsum_summarize as MS
-from matsum_muitas import MUITAS, is_subset
+import semantic_locations as MS
+from muitas import MUITAS, is_subset
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT  = os.environ.get("MATSUM_OUT", os.path.join(HERE, "output"))
-FIG  = os.environ.get("MATSUM_FIG", os.path.join(HERE, "figures"))
+OUT  = os.environ.get("SEM_OUT", os.path.join(HERE, "output"))
+FIG  = os.environ.get("SEM_FIG", os.path.join(HERE, "figures"))
 os.makedirs(FIG, exist_ok=True)
 
 # ---- operating point (validated on Paris-581; was m=3,k=2 tuned for the 20-trajectory PoC) ----

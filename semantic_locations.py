@@ -16,7 +16,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import pairwise_distances
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT  = os.environ.get("MATSUM_OUT", os.path.join(HERE, "output"))
+OUT  = os.environ.get("SEM_OUT", os.path.join(HERE, "output"))
 
 TAU = 0.9   # cosine similarity threshold (paper default)
 

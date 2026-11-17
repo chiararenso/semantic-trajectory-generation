@@ -9,7 +9,7 @@ import os, pickle, numpy as np, pandas as pd
 from collections import Counter, defaultdict
 from geolife_e1 import rle, submat, sim, markov
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", OUT)
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", OUT)
 K, N_SYN, R, REF_CAP = 5, 200, 20, 3000
 NS = [10, 20, 50, 100, 152]
 TAUS = np.round(np.arange(0.80, 1.0001, 0.02), 3)

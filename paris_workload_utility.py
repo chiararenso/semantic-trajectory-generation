@@ -20,11 +20,11 @@ per-state distribution; start times are bootstrapped from the real first-visit t
 """
 import os, numpy as np, pandas as pd
 from collections import Counter, defaultdict
-import matsum_summarize as MS
+import semantic_locations as MS
 from val_rq3 import markov
 from val_rq3_order2 import markov2
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", OUT)
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", OUT)
 K, MAXLEN, N_SYN, R = 5, 150, 200, 20
 NS = [20, 50, 100, 300, 581]
 try:

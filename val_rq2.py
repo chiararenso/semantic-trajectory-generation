@@ -14,9 +14,9 @@ Output: 3-panel figure (semantic gen-TV; DCR synth vs baseline; exact copies) wi
 """
 import os, numpy as np, pandas as pd, geopandas as gpd
 from collections import Counter, defaultdict
-import matsum_summarize as MS
+import semantic_locations as MS
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", OUT)
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", OUT)
 M, K, N_SYN = 2, 5, 200
 NS = [20, 50, 100, 300, 581]
 R, REF_CAP = 20, 120

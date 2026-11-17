@@ -6,7 +6,7 @@ belong to each activity category (home/work/leisure/...)? Useful for transport/u
 capacity questions ("when is demand for X highest"), complementary to TSTR (per-step
 prediction) and the published aggregate-density figure (spatial, not temporal).
 
-The generator (matsum_synth.SemanticMarkov) samples (state, dwell) sequences with NO absolute
+The generator (semantic_markov.SemanticMarkov) samples (state, dwell) sequences with NO absolute
 clock anchor -- there is no notion of what time of day a synthetic visit happens at. We add one
 the same way the paper already samples trajectory LENGTH empirically (DITRAS-style bootstrap):
 each synthetic trajectory's START time is drawn from the empirical distribution of REAL
@@ -17,11 +17,11 @@ the fragile tile-grounding machinery that caused the OD-matrix check to underper
 import os
 from collections import Counter, defaultdict
 import numpy as np, pandas as pd
-import matsum_summarize as MS
-from matsum_synth import build_visits, anonymize_vocabulary, SemanticMarkov
-import matsum_synth as SY
+import semantic_locations as MS
+from semantic_markov import build_visits, anonymize_vocabulary, SemanticMarkov
+import semantic_markov as SY
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", ".")
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", ".")
 M_TOP, K_SUPPORT, N_SYNTH = 2, 5, 200
 N_HOURS = 24
 TOP_CATEGORIES = 7

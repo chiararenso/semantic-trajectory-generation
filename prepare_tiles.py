@@ -23,14 +23,14 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
 # input trajectories + output dir are env-configurable so the same pipeline
 # runs on other datasets. Default: the Paris-OSM points file (Zenodo 15658129), see README.
-INPUT = os.environ.get("MATSUM_INPUT", os.path.join(DATA, "paris", "points_data.csv"))
-OUT   = os.environ.get("MATSUM_OUT",   os.path.join(HERE, "output"))
+INPUT = os.environ.get("SEM_INPUT", os.path.join(DATA, "paris", "points_data.csv"))
+OUT   = os.environ.get("SEM_OUT",   os.path.join(HERE, "output"))
 os.makedirs(OUT, exist_ok=True)
 
 POINTS_CSV = INPUT   # backward-compatible alias
 TAGS_TXT   = os.path.join(DATA, "pois_categories_OSM.txt")
 LABELS_CSV = os.path.join(DATA, "labeled_OSM_category.csv")
-PBF_PATH   = os.environ.get("MATSUM_PBF", "")  # path to the OSM .pbf extract (set via environment variable)
+PBF_PATH   = os.environ.get("SEM_PBF", "")  # path to the OSM .pbf extract (set via environment variable)
 
 # ----- configuration (paper default: squares, resolution 17) -----
 CONFIG = {
@@ -102,7 +102,7 @@ def extract_osm_features(bbox, tags):
         return gpd.read_parquet(cache)
     if not PBF_PATH or not os.path.exists(PBF_PATH):
         raise FileNotFoundError(
-            f"PBF not found. Set MATSUM_PBF to the Ile-de-France .osm.pbf path (got: {PBF_PATH!r})")
+            f"PBF not found. Set SEM_PBF to the Ile-de-France .osm.pbf path (got: {PBF_PATH!r})")
     print(f"  OSM features: extracting from PBF (bbox-clipped) ...")
     osm = OSM(PBF_PATH, bounding_box=list(bbox))
     feats = osm.get_data_by_custom_criteria(

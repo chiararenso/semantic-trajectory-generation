@@ -1,6 +1,6 @@
 """
 Three additional evaluation measures for the paper, reusing the SAME operating point
-(MAT-Sum m=2, k=5) and the SAME order-1 Markov generator (matsum_synth.SemanticMarkov):
+(MAT-Sum m=2, k=5) and the SAME order-1 Markov generator (semantic_markov.SemanticMarkov):
 
   1. DISTRIBUTION MATCH  - sequence-length and dwell-time distributions, real vs synthetic
                            (Jensen-Shannon divergence + two-sample KS).
@@ -9,16 +9,16 @@ Three additional evaluation measures for the paper, reusing the SAME operating p
   3. VOCABULARY k-ANONYMITY - support of each released semantic location, in VISITS and in DISTINCT
                            INDIVIDUALS (the privacy k); min / 5th-pct / median.
 
-Dataset-agnostic: reads the prepared outputs in MATSUM_OUT. R independent generations -> mean +/- 95% CI
+Dataset-agnostic: reads the prepared outputs in SEM_OUT. R independent generations -> mean +/- 95% CI
 for the synthetic-dependent measures. Vocabulary k-anonymity is a property of the real release (single value).
 """
 import os, numpy as np, pandas as pd
 from collections import Counter, defaultdict
-import matsum_summarize as MS
-import matsum_synth as SY
+import semantic_locations as MS
+import semantic_markov as SY
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", OUT)
-DS  = os.environ.get("MATSUM_DS", "Paris")     # label for prints/figure
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", OUT)
+DS  = os.environ.get("SEM_DS", "Paris")     # label for prints/figure
 M_TOP, K_SUP, R = 2, 5, 5          # N_synth is set = number of real sequences (matched-size comparison)
 try:
     from scipy.stats import t as tdist, ks_2samp

@@ -12,9 +12,9 @@ plus exact state-sequence copies of the sampled real set.
 import os, numpy as np, pandas as pd, geopandas as gpd
 from collections import Counter, defaultdict
 from sklearn.cluster import KMeans
-import matsum_summarize as MS, matsum_synth as SY
+import semantic_locations as MS, semantic_markov as SY
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", OUT)
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", OUT)
 TARGET, N_SYNTH = 328, 200
 R, SAMPLE_FRAC = 20, 0.70          # repetitions, 70% user subsample each
 rng = np.random.default_rng(0)
@@ -81,7 +81,7 @@ def main():
     frequent = [s for s, c in fs.items() if c >= 5 and len(s) > 0]
     jac = lambda a, b: len(a & b) / len(a | b) if (a | b) else 0.0
     remap = {s: (s if s in frequent else max(frequent, key=lambda f: jac(s, f))) for s in fs}
-    sem["matsum"] = sem["sig2"].map(lambda s: remap.get(s, s))
+    sem["sem_state"] = sem["sig2"].map(lambda s: remap.get(s, s))
     # Grid states (tune to ~TARGET visited cells)
     lo, hi = 0.0015, 0.06
     for _ in range(30):
@@ -95,7 +95,7 @@ def main():
     km = KMeans(n_clusters=TARGET, n_init=3, random_state=0).fit(XY[rng.choice(len(XY), 40000, replace=False)])
     sem["cluster"] = km.predict(XY)
 
-    methods = [("Grid-Markov", "grid"), ("Cluster-Markov", "cluster"), ("MAT-Sum-Markov", "matsum")]
+    methods = [("Grid-Markov", "grid"), ("Cluster-Markov", "cluster"), ("MAT-Sum-Markov", "sem_state")]
     # fixed codebook: per-state dominant label; per-tid state/label sequences
     dom = {col: sem.groupby(col)["top1"].agg(lambda s: s.value_counts().index[0]).to_dict()
            for _, col in methods}

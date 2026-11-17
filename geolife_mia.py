@@ -10,7 +10,7 @@ from collections import Counter
 from sklearn.metrics import roc_auc_score, roc_curve
 from geolife_e1 import rle, submat, sim, markov
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", OUT)
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", OUT)
 K, N_SYN, R, TEST_FRAC, CAP = 5, 300, 20, 0.20, 300
 NS = [20, 50, 100, 121]
 jac = lambda a, b: len(a & b) / len(a | b) if (a | b) else 0.0

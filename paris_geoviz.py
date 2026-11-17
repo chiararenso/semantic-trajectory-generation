@@ -10,10 +10,10 @@ geography. We report JSD, Pearson r and cosine over the two density fields, and 
 """
 import os, numpy as np, pandas as pd
 from collections import Counter, defaultdict
-import matsum_summarize as MS
+import semantic_locations as MS
 from val_rq3 import rle, markov
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", ".")
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", ".")
 K, N_GEN, G = 5, 2000, 90            # min-support, #synthetic sequences, grid resolution
 jac = lambda a, b: len(a & b) / len(a | b) if (a | b) else 0.0
 

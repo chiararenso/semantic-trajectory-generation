@@ -2,7 +2,7 @@
 Redraws the matched-budget figure (grid / cluster / semantic states, same order-1 Markov) from the saved results
 val_abstraction_budget.csv written by val_abstraction_budget.py. No experiment is re-run.
 Labels: the semantic representation is shown as "Semantic-Markov".
-Env: MATSUM_OUT (folder with the csv, default data/paris), MATSUM_FIG (output folder, default figures).
+Env: SEM_OUT (folder with the csv, default data/paris), SEM_FIG (output folder, default figures).
 """
 import os
 import pandas as pd
@@ -11,8 +11,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.environ.get("MATSUM_OUT", os.path.join(HERE, "data", "paris"))
-FIG = os.environ.get("MATSUM_FIG", os.path.join(HERE, "figures"))
+OUT = os.environ.get("SEM_OUT", os.path.join(HERE, "data", "paris"))
+FIG = os.environ.get("SEM_FIG", os.path.join(HERE, "figures"))
 R = 20  # paired samples behind the confidence intervals
 
 LABEL = {"Grid-Markov": "Grid-Markov", "Cluster-Markov": "Cluster-Markov", "MAT-Sum-Markov": "Semantic-Markov",

@@ -15,7 +15,7 @@ import os, numpy as np, pandas as pd, geopandas as gpd
 from collections import Counter, defaultdict
 from sklearn.cluster import KMeans
 
-OUT = os.environ["MATSUM_OUT"]; GEO = os.environ["GEO_OUT"]; FIG = os.environ.get("MATSUM_FIG", OUT)
+OUT = os.environ["SEM_OUT"]; GEO = os.environ["GEO_OUT"]; FIG = os.environ.get("SEM_FIG", OUT)
 M, K, N_SYN, DS = 2, 5, 200, 4
 NRQ1, R, REF_CAP, NEAR = 100, 20, 300, 0.95
 MINV, MINS = 10, 3
@@ -121,8 +121,8 @@ def run(sem, users, grng):
     fs = Counter(s for v in raw_v for s in v)
     freq = [s for s, c in fs.items() if c >= K and len(s) > 0] or [fs.most_common(1)[0][0]]
     remap = {s: (s if s in freq else max(freq, key=lambda f: jac(s, f))) for s in fs}
-    d = d.copy(); d["matsum"] = d["sig2"].map(lambda s: remap.get(s, s))
-    Kr = d["matsum"].nunique()
+    d = d.copy(); d["sem_state"] = d["sig2"].map(lambda s: remap.get(s, s))
+    Kr = d["sem_state"].nunique()
     # Grid matched to ~Kr visited cells
     lo, hi = 0.0008, 0.05
     for _ in range(28):
@@ -138,7 +138,7 @@ def run(sem, users, grng):
 
     gt = sess_seqs(d, "top1"); gt_bi = bigram(gt)
     out = {}
-    for name, col in [("Grid", "grid"), ("Cluster", "cluster"), ("MAT-Sum", "matsum")]:
+    for name, col in [("Grid", "grid"), ("Cluster", "cluster"), ("MAT-Sum", "sem_state")]:
         dom = d.groupby(col)["top1"].agg(lambda s: s.value_counts().index[0]).to_dict()
         real = sess_seqs(d, col)
         synth = markov(real, N_SYN, grng)

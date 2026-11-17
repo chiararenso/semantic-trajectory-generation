@@ -13,10 +13,10 @@ C dDCR with zero line), Markov vs LSTM, mean +/- 95% CI over 20 paired replicate
 """
 import os, numpy as np, pandas as pd
 from collections import Counter, defaultdict
-import matsum_summarize as MS
+import semantic_locations as MS
 import torch, torch.nn as nn
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", OUT)
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", OUT)
 M, K, N_SYN, MAXLEN = 2, 5, 200, 150
 NS = [20, 50, 100, 300, 581]
 R, REF_CAP, EPOCHS = 20, 150, 120

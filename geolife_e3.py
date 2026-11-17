@@ -16,7 +16,7 @@ import os, time, numpy as np, pandas as pd
 from collections import Counter, defaultdict
 from geolife_e1 import load, rle, bigram, tv, submat, sim, markov
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", OUT)
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", OUT)
 K, N_SYN, R, REF, NEAR = 5, 200, 20, 400, 0.95
 NS = [20, 50, 100, 152]
 EPOCHS, HID, EMB, LSTM_BUDGET_S = 80, 64, 32, 25.0

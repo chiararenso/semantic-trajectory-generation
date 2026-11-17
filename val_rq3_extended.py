@@ -18,11 +18,11 @@ import os, sys, argparse, time
 import numpy as np, pandas as pd
 from collections import Counter, defaultdict
 import torch, torch.nn as nn
-import matsum_summarize as MS
+import semantic_locations as MS
 from val_rq3 import (rle, ngram, tv, subset_matrix, sim, markov, jac, K, N_SYN, MAXLEN, NS, R, REF_CAP, NEAR, EPOCHS)
 from val_rq3_order2 import markov2
 
-OUT = os.environ["MATSUM_OUT"]
+OUT = os.environ["SEM_OUT"]
 ORDERS = [1, 2, 3, 4, 5]
 LSTM_CFG = {"lstm_h64": (64, 1), "lstm_h128": (128, 1), "lstm_h256": (256, 1), "lstm_l2": (64, 2)}
 

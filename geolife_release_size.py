@@ -16,7 +16,7 @@ import os, pickle, numpy as np, pandas as pd
 from collections import Counter
 from geolife_e1 import rle, submat, sim, markov
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", OUT)
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", OUT)
 K = 5
 NS_RELEASE = [200, 1000, 5000, 10000, 13370]
 R = 5

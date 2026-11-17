@@ -31,10 +31,10 @@ from collections import Counter, defaultdict
 from sklearn.metrics import roc_auc_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
-import matsum_summarize as MS
+import semantic_locations as MS
 from val_rq3 import rle, subset_matrix, sim, markov
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", OUT)
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", OUT)
 K, N_SYN = 5, 200
 K_SHADOW, R, TEST_FRAC = 20, 10, 0.20
 jac = lambda a, b: len(a & b) / len(a | b) if (a | b) else 0.0

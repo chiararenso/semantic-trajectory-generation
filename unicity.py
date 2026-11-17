@@ -66,7 +66,7 @@ def build_vocab_and_synth(state_seqs, label_seqs, n_synth, K=5, seed=0):
 
 
 def load_paris():
-    import matsum_summarize as MS
+    import semantic_locations as MS
     gdf, areas = MS.load()
     sem = MS.semantic_mapping(gdf, areas).sort_values(["tid", "time"])
     sem["top1"] = sem["label_tfidf"].apply(lambda x: x[0] if hasattr(x, "__len__") and len(x) else "NA")
@@ -79,7 +79,7 @@ def load_paris():
 
 def load_geolife(n_sample):
     import pickle
-    with open(os.path.join(os.environ["MATSUM_OUT"], "geolife_sess_cache.pkl"), "rb") as f:
+    with open(os.path.join(os.environ["SEM_OUT"], "geolife_sess_cache.pkl"), "rb") as f:
         sess, _ = pickle.load(f)
     tids = list(sess.keys())
     idx = np.random.default_rng(0).choice(len(tids), min(n_sample, len(tids)), replace=False)
@@ -89,7 +89,7 @@ def load_geolife(n_sample):
 
 def main():
     which = sys.argv[1] if len(sys.argv) > 1 else "both"
-    OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", OUT)
+    OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", OUT)
     res = {}
     if which in ("paris", "both"):
         print("[unicity] Paris", flush=True)

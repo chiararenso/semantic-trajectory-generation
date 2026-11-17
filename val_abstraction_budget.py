@@ -17,9 +17,9 @@ If semantics still wins at EVERY matched B, the win cannot come from having fewe
 import os, numpy as np, pandas as pd, geopandas as gpd
 from collections import Counter, defaultdict
 from sklearn.cluster import KMeans
-import matsum_summarize as MS, matsum_synth as SY
+import semantic_locations as MS, semantic_markov as SY
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", OUT)
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", OUT)
 BUDGETS = [40, 80, 160, 320, 480]
 N_SYNTH = 200
 R, SAMPLE_FRAC = 20, 0.70
@@ -76,7 +76,7 @@ def markov_gen(real_seqs, n, grng):
     return out
 
 
-def build_matsum_col(sem, fs, B):
+def build_sem_state_col(sem, fs, B):
     """codebook = B most frequent top-2 signatures; remap the rest to nearest by Jaccard."""
     keep = [s for s, _ in fs.most_common(B) if len(s) > 0]
     kset = set(keep)
@@ -124,13 +124,13 @@ def main():
     for B in BUDGETS:
         print(f"\n[budget] target B={B}", flush=True)
         cols = {}
-        sem["matsum"] = build_matsum_col(sem, fs, B); cols["MAT-Sum-Markov"] = "matsum"
+        sem["sem_state"] = build_sem_state_col(sem, fs, B); cols["MAT-Sum-Markov"] = "sem_state"
         gcol, nv = build_grid_col(sem, B); sem["grid"] = gcol; cols["Grid-Markov"] = "grid"
         km = KMeans(n_clusters=B, n_init=2, random_state=0).fit(sub)
         sem["cluster"] = km.predict(XY); cols["Cluster-Markov"] = "cluster"
         realized = {"Grid-Markov": nv,
                     "Cluster-Markov": B,
-                    "MAT-Sum-Markov": int(sem["matsum"].nunique())}
+                    "MAT-Sum-Markov": int(sem["sem_state"].nunique())}
         print("   realized #states:", realized, flush=True)
 
         dom = {c: sem.groupby(c)["top1"].agg(lambda s: s.value_counts().index[0]).to_dict()

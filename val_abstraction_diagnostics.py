@@ -20,9 +20,9 @@ induces, at the same matched ~328-state budget.
 import os, numpy as np, pandas as pd, geopandas as gpd
 from collections import Counter, defaultdict
 from sklearn.cluster import KMeans
-import matsum_summarize as MS, matsum_synth as SY
+import semantic_locations as MS, semantic_markov as SY
 
-OUT = os.environ["MATSUM_OUT"]
+OUT = os.environ["SEM_OUT"]
 TARGET = 328
 R, SAMPLE_FRAC = 20, 0.70
 rng = np.random.default_rng(0)          # identical seed/draw order to val_abstraction_ci.py
@@ -112,7 +112,7 @@ def main():
     frequent = [s for s, c in fs.items() if c >= 5 and len(s) > 0]
     jac = lambda a, b: len(a & b) / len(a | b) if (a | b) else 0.0
     remap = {s: (s if s in frequent else max(frequent, key=lambda f: jac(s, f))) for s in fs}
-    sem["matsum"] = sem["sig2"].map(lambda s: remap.get(s, s))
+    sem["sem_state"] = sem["sig2"].map(lambda s: remap.get(s, s))
     # Grid states (tune to ~TARGET visited cells)
     lo, hi = 0.0015, 0.06
     for _ in range(30):
@@ -126,7 +126,7 @@ def main():
     km = KMeans(n_clusters=TARGET, n_init=3, random_state=0).fit(XY[rng.choice(len(XY), 40000, replace=False)])
     sem["cluster"] = km.predict(XY)
 
-    methods = [("Grid-Markov", "grid"), ("Cluster-Markov", "cluster"), ("MAT-Sum-Markov", "matsum")]
+    methods = [("Grid-Markov", "grid"), ("Cluster-Markov", "cluster"), ("MAT-Sum-Markov", "sem_state")]
     tids = sem["tid"].unique()
     seqs_by = {col: {} for _, col in methods}
     for tid, gtr in sem.groupby("tid", sort=False):

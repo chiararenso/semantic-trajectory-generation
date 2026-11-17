@@ -25,9 +25,9 @@ marginal regardless of generator quality.
 """
 import os, numpy as np, pandas as pd, geopandas as gpd
 from collections import Counter, defaultdict
-import matsum_summarize as MS
+import semantic_locations as MS
 
-OUT = os.environ["MATSUM_OUT"]
+OUT = os.environ["SEM_OUT"]
 TARGET_K = 5          # MAT-Sum operating point k (m=2 fixed)
 N_SYNTH = 200
 R, SAMPLE_FRAC = 20, 0.70
@@ -93,27 +93,27 @@ def main():
     frequent = [s for s, c in fs.items() if c >= TARGET_K and len(s) > 0]
     jac = lambda a, b: len(a & b) / len(a | b) if (a | b) else 0.0
     remap = {s: (s if s in frequent else max(frequent, key=lambda f: jac(s, f))) for s in fs}
-    sem["matsum"] = sem["sig2"].map(lambda s: remap.get(s, s))
+    sem["sem_state"] = sem["sig2"].map(lambda s: remap.get(s, s))
 
     # per-final-state dominant/secondary decomposition (dominant = majority real top1 label
     # among points mapped to that state; secondary = the other element of the signature, if any)
-    dom = sem.groupby("matsum")["top1"].agg(lambda s: s.value_counts().index[0]).to_dict()
+    dom = sem.groupby("sem_state")["top1"].agg(lambda s: s.value_counts().index[0]).to_dict()
     def secondary_of(state, dominant):
         others = [a for a in state if a != dominant]
         return others[0] if others else "NONE"
     sec = {s: secondary_of(s, dom[s]) for s in dom}
-    sem["dominant"] = sem["matsum"].map(dom)
-    sem["secondary"] = sem["matsum"].map(sec)
+    sem["dominant"] = sem["sem_state"].map(dom)
+    sem["secondary"] = sem["sem_state"].map(sec)
 
     tids = sem["tid"].unique()
     seqs_by_state = {}
     dominant_by_tid = {}
     secondary_by_tid = {}
     for tid, g in sem.groupby("tid", sort=False):
-        seqs_by_state[tid] = rle(g["matsum"].tolist())
+        seqs_by_state[tid] = rle(g["sem_state"].tolist())
         # per-visit (post RLE) dominant/secondary, aligned with the RLE-collapsed state sequence
         states_rle, dominants_rle, secondaries_rle = [], [], []
-        for st, d, sc in zip(g["matsum"], g["dominant"], g["secondary"]):
+        for st, d, sc in zip(g["sem_state"], g["dominant"], g["secondary"]):
             if not states_rle or states_rle[-1] != st:
                 states_rle.append(st); dominants_rle.append(d); secondaries_rle.append(sc)
         dominant_by_tid[tid] = dominants_rle

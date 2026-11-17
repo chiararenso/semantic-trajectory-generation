@@ -10,10 +10,10 @@ This replaces the mean-only ΔDCR view with a worst-case / tail view.
 """
 import os, numpy as np, pandas as pd
 from collections import Counter, defaultdict
-import matsum_summarize as MS
+import semantic_locations as MS
 from val_rq3 import rle, subset_matrix, sim, markov
 
-OUT = os.environ["MATSUM_OUT"]; FIG = os.environ.get("MATSUM_FIG", OUT)
+OUT = os.environ["SEM_OUT"]; FIG = os.environ.get("SEM_FIG", OUT)
 M, K, N_SYN, R = 2, 5, 200, 20
 NS = [20, 50, 100, 300, 581]
 TAUS = np.round(np.arange(0.80, 1.0001, 0.02), 3)
